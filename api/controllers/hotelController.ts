@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import HttpException from "../exceptions/HttpException";
 import Hotel from "../models/Hotel";
+import Room from "../models/Room";
 
 export const createHotel = async (req: Request, res: Response, next: NextFunction) => {
   const newHotel = new Hotel(req.body);
@@ -114,6 +115,19 @@ export const countByType = async (req: Request, res: Response, next: NextFunctio
       })
     );
     res.status(200).json(list);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getHotelRooms = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const hotel = await Hotel.findById(req.params.id);
+    if (!hotel || !hotel.rooms) {
+      return res.status(200).json([]);
+    }
+    const rooms = await Promise.all(hotel.rooms.map((room) => Room.findById(room)));
+    res.status(200).json(rooms);
   } catch (error) {
     next(error);
   }

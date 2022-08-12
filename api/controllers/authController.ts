@@ -10,8 +10,7 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
     const hash = bcrypt.hashSync(req.body.password, salt);
 
     const newUser = new User({
-      username: req.body.username,
-      email: req.body.email,
+      ...req.body,
       password: hash
     });
 
@@ -35,7 +34,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
     res
       .cookie("access_token", token, { httpOnly: true })
       .status(200)
-      .json({ _id, username, email, createdAt, updatedAt });
+      .json({ details: { _id, username, email, createdAt, updatedAt }, isAdmin });
   } catch (error) {
     next(error);
   }

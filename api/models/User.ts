@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 export interface IUser {
   username: string;
   email: string;
+  country: String;
+  img: String;
+  city: String;
+  phone: String;
   password: string;
   isAdmin: boolean;
   createdAt: Date;
@@ -22,6 +26,21 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true
+    },
+    country: {
+      type: String,
+      required: true
+    },
+    img: {
+      type: String
+    },
+    city: {
+      type: String,
+      required: true
+    },
+    phone: {
+      type: String,
+      required: true
     },
     password: {
       type: String,

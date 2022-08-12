@@ -5,6 +5,7 @@ import {
   createHotel,
   deleteHotel,
   getHotel,
+  getHotelRooms,
   getHotels,
   updateHotel
 } from "../controllers/hotelController";
@@ -14,10 +15,11 @@ const router = express.Router();
 
 router.get("/countByCity", countByCity);
 router.get("/countByType", countByType);
+router.get("/:id", getHotel);
+router.get("/", getHotels);
+router.get("/room/:id", getHotelRooms);
 router.post("/", verifyAdmin, createHotel);
 router.put("/:id", verifyAdmin, updateHotel);
 router.delete("/:id", verifyAdmin, deleteHotel);
-router.get("/:id", getHotel);
-router.get("/", getHotels);
 
 export default router;
