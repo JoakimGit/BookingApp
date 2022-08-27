@@ -9,7 +9,7 @@ import axios from "axios";
 
 const Reserve = ({ setOpen, hotelId }) => {
   const [selectedRooms, setSelectedRooms] = useState([]);
-  const { data } = useFetch(`/hotels/room/${hotelId}`);
+  const { data } = useFetch(`/lodgings/room/${hotelId}`);
   const { dates } = useContext(SearchContext);
 
   const handleSelect = (e) => {

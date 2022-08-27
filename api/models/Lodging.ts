@@ -1,14 +1,13 @@
 import mongoose, { Types } from "mongoose";
 import { IRoomSchema } from "./Room";
 
-export interface IHotel {
+export interface ILodging {
   name: string;
   type: string;
   city: string;
   address: string;
   distance: string;
   photos: string[];
-  title: string;
   description: string;
   rating: number;
   rooms: Types.DocumentArray<IRoomSchema>;
@@ -16,11 +15,11 @@ export interface IHotel {
   featured: boolean;
 }
 
-interface IHotelSchema extends IHotel, mongoose.Document {
+interface ILodgingSchema extends ILodging, mongoose.Document {
   city_lower: string;
 }
 
-const HotelSchema = new mongoose.Schema({
+const LodgingSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
@@ -47,10 +46,6 @@ const HotelSchema = new mongoose.Schema({
   photos: {
     type: [String]
   },
-  title: {
-    type: String,
-    required: true
-  },
   description: {
     type: String,
     required: true
@@ -76,9 +71,9 @@ const HotelSchema = new mongoose.Schema({
   }
 });
 
-HotelSchema.pre<IHotelSchema>("save", function (next) {
+LodgingSchema.pre<ILodgingSchema>("save", function (next) {
   this.city_lower = this.city.toLowerCase();
   next();
 });
 
-export default mongoose.model<IHotelSchema>("Hotel", HotelSchema);
+export default mongoose.model<ILodgingSchema>("Lodging", LodgingSchema);

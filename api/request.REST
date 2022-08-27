@@ -1,4 +1,4 @@
-POST http://localhost:8080/api/hotels HTTP/1.1
+POST http://localhost:8080/api/lodgings HTTP/1.1
 content-type: application/json
 
 {
@@ -17,8 +17,7 @@ content-type: application/json
 
 ###
 
-PUT http://localhost:8080/api/hotels/628a7c89edd136f982090a67 HTTP/1.1
-content-type: application/json
+lodgingscontent-type: application/json
 
 {
   "name": "Hotel Joakim updated",
@@ -35,22 +34,37 @@ content-type: application/json
   "features": true
 }
 
-###
+### DELETE LOGDGING
 
-DELETE  http://localhost:8080/api/hotels/628a7c89edd136f982090a67 HTTP/1.1
+DELETE  http://localhost:8080/api/lodgings/628a7c89edd136f982090a67 HTTP/1.1
 content-type: application/json
 
-###
+### LOGDGING DETAILS
 
-GET  http://localhost:8080/api/hotels/628a7c89edd136f982090a67 HTTP/1.1
+GET  http://localhost:8080/api/lodgings/628a7c89edd136f982090a67 HTTP/1.1
 content-type: application/json
 
-###
+### LOGDGING COUNT BY CITY
 
-GET  http://localhost:8080/api/hotels HTTP/1.1
+GET  http://localhost:8080/api/lodgings/countByCity?cities=london,copenhagen HTTP/1.1
 content-type: application/json
 
-###
+### LOGDGING COUNT BY PROPERTY TYPE
+
+GET  http://localhost:8080/api/lodgings/countByType HTTP/1.1
+content-type: application/json
+
+### FEATURED LOGDGINGS
+
+GET  http://localhost:8080/api/lodgings?featured=true&limit=4 HTTP/1.1
+content-type: application/json
+
+### ALL LOGDGINGS
+
+GET  http://localhost:8080/api/lodgings HTTP/1.1
+content-type: application/json
+
+### SIGN UP
 
 POST http://localhost:8080/api/auth/register HTTP/1.1
 content-type: application/json
@@ -61,27 +75,27 @@ content-type: application/json
   "password": "secret"
 }
 
-###
+### LOGIN
 
 POST http://localhost:8080/api/auth/login HTTP/1.1
 content-type: application/json
 
 {
-  "username": "Joakim2",
-  "password": "secret"
+  "username": "Joakim",
+  "password": "joakim"
 }
 
-###
+### ALL USERS
 
 GET  http://localhost:8080/api/users HTTP/1.1
 content-type: application/json
 
-###
+### USER DETAILS
 
 GET  http://localhost:8080/api/users/628fa6be716891a2262f7f98 HTTP/1.1
 content-type: application/json
 
-###
+### UPDATE USER
 
 PUT http://localhost:8080/api/users/628fa6be716891a2262f7f98 HTTP/1.1
 content-type: application/json
@@ -90,7 +104,3 @@ content-type: application/json
   "username": "Joakim updated",
   "password": "secret"
 }
-
-###
-
-GET http://localhost:8080/api/users/checkuser/628fa6be716891a2262f7f9 HTTP/1.1

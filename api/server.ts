@@ -1,15 +1,15 @@
 require("dotenv").config();
-import express, { Request, Response, NextFunction } from "express";
-const app = express();
+import express from "express";
 import connectDB from "./config/database";
 import authRoute from "./routes/auth";
 import userRoute from "./routes/users";
-import hotelsRoute from "./routes/hotels";
+import lodgingsRoute from "./routes/lodgings";
 import roomsRoute from "./routes/rooms";
-import HttpException from "./exceptions/HttpException";
 import cookieParser from "cookie-parser";
+import errorHandler from "./utils/errorHandler";
 import cors from "cors";
 
+const app = express();
 connectDB();
 
 // app.use(cors());
@@ -18,21 +18,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
-app.use("/api/hotels", hotelsRoute);
+app.use("/api/lodgings", lodgingsRoute);
 app.use("/api/rooms", roomsRoute);
 
-app.use((err: HttpException, req: Request, res: Response, next: NextFunction) => {
-  if (res.headersSent) {
-    return next(err);
-  }
-  const status = err.status || 500;
-  const message = err.message || "Something went wrong!";
-
-  res.status(status).send({
-    status,
-    message
-  });
-});
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 8080;
 

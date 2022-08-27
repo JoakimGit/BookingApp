@@ -2,7 +2,7 @@ import useFetch from "../../hooks/useFetch";
 import "./propertyList.css";
 
 const PropertyList = () => {
-  const { data, loading, error } = useFetch("/hotels/countByType");
+  const { data, loading } = useFetch("/lodgings/countByType");
 
   const imagesMap = new Map([
     [
@@ -22,7 +22,7 @@ const PropertyList = () => {
       "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/bg_resorts/6f87c6143fbd51a0bb5d15ca3b9cf84211ab0884.jpg"
     ],
     [
-      "cabins",
+      "inns",
       "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-chalet_300/8ee014fcc493cb3334e25893a1dee8c6d36ed0ba.jpg"
     ]
   ]);

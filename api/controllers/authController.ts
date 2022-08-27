@@ -24,17 +24,21 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
 export const login = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = await User.findOne({ username: req.body.username });
-    if (!user) return next(new HttpException(404, "User not found"));
+    if (!user) return next(new HttpException(400, "Wrong password or username!"));
 
     const isPasswordCorrect = await bcrypt.compare(req.body.password, user.password);
     if (!isPasswordCorrect) return next(new HttpException(400, "Wrong password or username!"));
 
     const { _id, username, email, isAdmin, createdAt, updatedAt } = user;
-    const token = jwt.sign({ id: _id, isAdmin }, process.env.JWT_SECRET as string);
+    const token = jwt.sign(
+      { id: _id, isAdmin, exp: Date.now() / 1000 + 60 * 60 * 24 * 7 },
+      process.env.JWT_SECRET as string
+    );
+
     res
       .cookie("access_token", token, { httpOnly: true })
       .status(200)
-      .json({ details: { _id, username, email, createdAt, updatedAt }, isAdmin });
+      .json({ details: { _id, username, email, createdAt, updatedAt, isAdmin } });
   } catch (error) {
     next(error);
   }

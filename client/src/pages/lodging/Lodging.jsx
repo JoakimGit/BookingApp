@@ -1,4 +1,4 @@
-import "./hotel.css";
+import "./lodging.css";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
 import MailList from "../../components/mailList/MailList";
@@ -29,7 +29,7 @@ const Hotel = () => {
   const { dates, options } = useContext(SearchContext);
   const { user } = useContext(AuthContext);
 
-  const { data, loading } = useFetch(`/hotels/${hotelId}`);
+  const { data, loading } = useFetch(`/lodgings/${hotelId}`);
   const dateRange = dayDifference(dates[0].endDate, dates[0].startDate);
 
   const handleOpen = (i) => {

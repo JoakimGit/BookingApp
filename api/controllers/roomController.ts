@@ -1,22 +1,26 @@
 import { NextFunction, Request, Response } from "express";
-import Hotel from "../models/Hotel";
+import Lodging from "../models/Lodging";
 import Room from "../models/Room";
 
 export const createRoom = async (req: Request, res: Response, next: NextFunction) => {
-  const hotelId = req.params.hotelid;
+  const lodgingId = req.query.lodgingid;
   const newRoom = new Room(req.body);
+  console.log("LodgingID:", lodgingId);
 
   try {
     const savedRoom = await newRoom.save();
-    const hotel = await Hotel.findById(hotelId);
 
-    if (!hotel) {
-      res.status(404).json({ message: `No hotel exists with id: ${hotelId}` });
-      return;
+    if (lodgingId) {
+      const lodging = await Lodging.findById(lodgingId);
+
+      if (!lodging) {
+        res.status(404).json({ message: `No lodging exists with id: ${lodgingId}` });
+        return;
+      }
+
+      lodging.rooms.push(savedRoom._id);
+      await lodging.save();
     }
-
-    hotel.rooms.push(savedRoom._id);
-    await hotel.save();
 
     res.status(200).json(savedRoom);
   } catch (error) {
@@ -60,7 +64,7 @@ export const updateRoomAvailability = async (req: Request, res: Response, next: 
 };
 
 export const deleteRoom = async (req: Request, res: Response, next: NextFunction) => {
-  const hotelId = req.params.hotelid;
+  const lodgingId = req.query.lodgingid;
   const id = req.params.id;
 
   try {
@@ -71,15 +75,17 @@ export const deleteRoom = async (req: Request, res: Response, next: NextFunction
       return;
     }
 
-    const hotel = await Hotel.findById(hotelId);
+    if (lodgingId) {
+      const lodging = await Lodging.findById(lodgingId);
 
-    if (!hotel) {
-      res.status(404).json({ message: `No hotel exists with id: ${hotelId}` });
-      return;
+      if (!lodging) {
+        res.status(404).json({ message: `No lodging exists with id: ${lodgingId}` });
+        return;
+      }
+
+      lodging.rooms.pull(id);
+      await lodging.save();
     }
-
-    hotel.rooms.pull(id);
-    await hotel.save();
 
     res.status(200).json({ message: "Room has been successfully deleted" });
   } catch (error) {
