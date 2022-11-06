@@ -5,7 +5,7 @@ export interface IRoom {
   price: number;
   maxPeople: number;
   description: string;
-  roomNumbers: { number: string; unavailableDates: [Date] };
+  roomNumbers: [{ number: string; unavailableDates: [Date] }];
   createdAt: Date;
   updatedAt: Date;
 }

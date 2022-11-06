@@ -1,20 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-
-export interface Lodging {
-  _id: string;
-  name: string;
-  type: string;
-  city: string;
-  address: string;
-  distance: string;
-  photos: string[];
-  description: string;
-  rating: number;
-  rooms: any[];
-  cheapestPrice: number;
-  featured: boolean;
-}
+import { Lodging } from "../../Models/Lodging";
 
 async function getFeaturedProperties(): Promise<Lodging[]> {
   const response = await axios.get("/lodgings?featured=true&limit=4");

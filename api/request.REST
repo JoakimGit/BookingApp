@@ -34,34 +34,39 @@ lodgingscontent-type: application/json
   "features": true
 }
 
-### DELETE LOGDGING
+### DELETE LODGING
 
 DELETE  http://localhost:8080/api/lodgings/628a7c89edd136f982090a67 HTTP/1.1
 content-type: application/json
 
-### LOGDGING DETAILS
+### LODGING DETAILS
 
 GET  http://localhost:8080/api/lodgings/628a7c89edd136f982090a67 HTTP/1.1
 content-type: application/json
 
-### LOGDGING COUNT BY CITY
+### LODGING COUNT BY CITY
 
 GET  http://localhost:8080/api/lodgings/countByCity?cities=london,copenhagen HTTP/1.1
 content-type: application/json
 
-### LOGDGING COUNT BY PROPERTY TYPE
+### LODGING COUNT BY PROPERTY TYPE
 
 GET  http://localhost:8080/api/lodgings/countByType HTTP/1.1
 content-type: application/json
 
-### FEATURED LOGDGINGS
+### FEATURED LODGINGS
 
 GET  http://localhost:8080/api/lodgings?featured=true&limit=4 HTTP/1.1
 content-type: application/json
 
-### ALL LOGDGINGS
+### ALL LODGINGS
 
 GET  http://localhost:8080/api/lodgings HTTP/1.1
+content-type: application/json
+
+### ALL ROOMS FOR LODGING
+
+GET  http://localhost:8080/api/lodgings/room/62fbf8d3c48afe0684de5362 HTTP/1.1
 content-type: application/json
 
 ### SIGN UP

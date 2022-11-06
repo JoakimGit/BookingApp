@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Lodging } from "../components/FeaturedProperties/FeaturedProperties";
 import PropertyList from "../components/PropertyList/PropertyList";
 import SearchBox from "../components/SearchBox/SearchBox";
+import { Lodging } from "../Models/Lodging";
 
 const PropertiesList = () => {
   const [properties, setProperties] = useState<Lodging[]>([]);

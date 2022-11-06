@@ -74,7 +74,7 @@ export const getLodgings = async (req: Request, res: Response, next: NextFunctio
   try {
     const lodgings = await Lodging.find({
       ...others,
-      city_lower: (city as string)?.toLowerCase(),
+      ...(city ? { city_lower: (city as string)?.toLowerCase() } : {}),
       cheapestPrice: { $gt: min || 1, $lt: max || 99999 }
     }).limit(Number(limit));
     res.status(200).json(lodgings);

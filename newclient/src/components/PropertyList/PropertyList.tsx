@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Lodging, mapRatingToString } from "../FeaturedProperties/FeaturedProperties";
+import { Lodging } from "../../Models/Lodging";
+import { mapRatingToString } from "../FeaturedProperties/FeaturedProperties";
 
 interface PropertyListProps {
   properties: Lodging[];

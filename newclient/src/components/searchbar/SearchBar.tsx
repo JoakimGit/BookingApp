@@ -11,7 +11,9 @@ import { atom, useAtom } from "jotai";
 export type Options = "adult" | "children" | "room";
 export const optionsAtom = atom({ adult: 1, children: 0, room: 1 });
 export const destinationAtom = atom("");
-export const datesAtom = atom([{ startDate: new Date(), endDate: new Date(), key: "selection" }]);
+export const datesAtom = atom([
+  { startDate: new Date(), endDate: new Date(Date.now() + 24 * 60 * 60 * 1000), key: "selection" }
+]);
 
 const SearchBar = () => {
   const [options, setOptions] = useAtom(optionsAtom);

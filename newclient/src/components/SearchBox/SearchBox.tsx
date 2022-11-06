@@ -6,8 +6,8 @@ import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { Lodging } from "../FeaturedProperties/FeaturedProperties";
 import { useAtom } from "jotai";
+import { Lodging } from "../../Models/Lodging";
 
 interface SearchBoxProps {
   handleSearch: React.Dispatch<React.SetStateAction<Lodging[]>>;
